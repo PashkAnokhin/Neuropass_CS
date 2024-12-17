@@ -28,16 +28,27 @@ export_temp_img(img, 'current.jpg', str(i))
 i = i + 1
 
 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-lower_red = np.array([170,50,50])
-upper_red = np.array([180,255,255])
+lower_red = np.array([139,0,209])
+upper_red = np.array([255,255,255])
 mask1 = cv2.inRange(hsv, lower_red, upper_red)
+
+"""
+cv2.inRange — это функция в OpenCV, которая позволяет наложить на кадр цветовой фильтр в заданном диапазоне. 3
+Функция принимает три параметра: изображение, нижнее и верхнее значения диапазона. Она возвращает бинарную маску (ndarray из единиц и нулей) размером
+с оригинальное изображение. Единицы обозначают значения в пределах диапазона, а нули — вне его. 2
+Пример использования: маска красного цвета mask1 = cv2.inRange(img, (0, 0, 50), (50, 50, 255))
+
+"""
+
+
+
 target = cv2.bitwise_and(img,img, mask=mask1)
 
-cv2.imshow('target', target)
-cv2.waitKey(0)
+export_temp_img(target, 'red.jpg', str(i))
+i = i + 1
 
 #в оттенки серого
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(target, cv2.COLOR_BGR2GRAY)
 export_temp_img(gray, 'gray.jpg', str(i))
 i = i + 1
 
@@ -74,7 +85,7 @@ cv2.Canny(image, threshold1, threshold2[, edges[, apertureSize[, L2gradient]]])
 
 
 
-"""
+
 #вывод на экран этапов обработки изображений
 temp_images = os.listdir(temp)
 temp_images.sort()
@@ -82,8 +93,7 @@ print(temp_images)
 
 for temp_image in temp_images:
     i = cv2.imread(temp + temp_image)
-    cv2.imshow(temp_image, i)
+    cv2.imshow('res', i)
     cv2.waitKey(0)
 
 
-"""

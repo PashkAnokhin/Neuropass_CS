@@ -5,7 +5,8 @@ import os
 
 from matplotlib import pyplot as pl
 
-path = '/home/gans/Документы/Github/Neuropass_CS/Cytology'
+#path = '/home/gans/Документы/Github/Neuropass_CS/Cytology'
+path = '/Users/Pashka/Documents/Github/Neuropass_CS/Cytology'
 temp = path + '/temp/'
 temp_images = os.listdir(temp)
 i = 1
@@ -95,7 +96,7 @@ cv2.Canny(image, threshold1, threshold2[, edges[, apertureSize[, L2gradient]]])
 
 
 
-cont = cv2.findContours(edges.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+#cont = cv2.findContours(edges.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 
 """
@@ -121,18 +122,18 @@ CV_CHAIN_APPROX_SIMPLE — склеивает все горизонтальны�
 """
 
 
-cont = imutils.grab_contours(cont)
+#cont = imutils.grab_contours(cont)
 
 """
 imutils.grab_contours — это функция из библиотеки imutils, которая извлекает реальные контуры из результата cv.findContours
 """
 #cont = sorted(cont, key=cv2.contourArea, reverse=True)[:8]
 
-pos = None
-for i in cont:
-    approx = cv2.approxPolyDP(pos, 0.01 * cv2.arcLength(pos, True), True)
+#pos = None
+#for i in cont:
+#    approx = cv2.approxPolyDP(pos, 0.01 * cv2.arcLength(pos, True), True)
 
-    """
+"""
     cv2.approxPolyDP() в OpenCV используется для аппроксимации многоугольной кривой, уменьшая количество вершин при сохранении общей формы кривой. 2
 
 Функция принимает четыре параметра: 1
@@ -146,9 +147,10 @@ closed — параметр, указывающий, является ли кр�
     """
 
 
-    if len(approx) == 4:
-        pos = approx
-        break
+ #   if len(approx) == 4:
+ #       pos = approx
+ #       break
+"""
 
 mask_cont = np.zeros(gray.shape, np.uint8)
 new_img = cv2.drawContours(mask_cont, [pos], 0, 255, -1)
@@ -166,7 +168,7 @@ pl.imshow(cv2.cvtColor(crop, cv2.COLOR_BGR2RGB))
 pl.show()
 
 
-
+"""
 
 
 #вывод на экран этапов обработки изображений
